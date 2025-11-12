@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import PokedexFrame from './components/pokedexFrame'
+import MainScreen from './components/MainScreen'
 
 import './App.css'
 
@@ -7,9 +9,9 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl text-slate-600 font-bold underline">
-      Hello world!
-    </h1>
+    <div className="flex justify-center py-10 px-5">
+    <PokedexFrame/>
+    </div>
     </>
   )
 }
