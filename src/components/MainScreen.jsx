@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import staticTv from "../assets/imgs/static.gif"
 import SearchBar from "./SearchBar"
+import ScreenContainerData from './ScreenContainerData'
 export default function MainScreen() {
 
   const [pokemonName, setPokemonName] = useState('')
@@ -75,29 +76,8 @@ export default function MainScreen() {
   
   return (
     <>
-    <div>
-      { firstApiResponse &&
-      <div>
-      <h3>Putting variables here</h3>
-      <span>{pokeHeight/10} m</span>
-      <br />
-      <span>{pokemonNumber}</span>
-      <br />
-      <span>{pokeName}</span>
-      <br />
-      <span>{pokeType}</span>
-      <br />
-      <span><img src={pokePic} alt="pokePic" /></span>
-      <br />
-       <span><img src={pokeSecondPic} alt="pokePic" /></span>
-      <br />
-      <span>{pokeWeight/10} lbs.</span>
-      <br />
-      {secondApiResponse?  <span>{pokeDescription}</span> : <span>No data available</span> }
-      </div>
-              }
-      {!firstApiResponse && <span>{error}</span>}
-    </div> 
+    <ScreenContainerData dataFromFirstApi={firstApiResponse} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
+    
     <div className="h-80 mt-5 flex justify-center bg-white/60 backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]">
         <img className="w-full h-full object-fill rounded-l" src={screen} alt="pokeScreen" />
     </div>
