@@ -62,7 +62,6 @@ export default function MainScreen() {
     }
     const dataFromSecondApi = await secondPokeApiResponse.json();
     setSecondApiResponse(dataFromSecondApi) // Save the result of the second fetch
-    console.log(dataFromSecondApi.flavor_text_entries[0].flavor_text)
     setPokeDescription(dataFromSecondApi.flavor_text_entries[0].flavor_text)
   } catch (err) {
     // --- Step 4: Error Handling ---
@@ -78,9 +77,7 @@ export default function MainScreen() {
     <>
     <ScreenContainerData dataFromFirstApi={firstApiResponse} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
     
-    <div className="h-80 mt-5 flex justify-center bg-white/60 backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]">
-        <img className="w-full h-full object-fill rounded-l" src={screen} alt="pokeScreen" />
-    </div>
+    
     <SearchBar pokemonName={pokemonName} handleInputChange={handleInputChange} triggerFetch={fetchPokemon} isFetching={isLoading}/>
     </>
   )
