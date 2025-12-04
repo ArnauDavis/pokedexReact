@@ -11,6 +11,7 @@ export default function MainScreen() {
   const [screen, setScreen] = useState(staticTv)
   const [firstApiResponse, setfirstApiResponse] = useState(null)
   const [secondApiResponse, setSecondApiResponse] = useState(null)
+  const [pokeTypeImg, setpokeTypeImg] = useState(null)
   const [pokeHeight, setpokeHeight] = useState(null)
   const [pokemonNumber, setPokemonNumber] = useState(null)
   const [pokeName, setPokeName] = useState(null)
@@ -23,11 +24,15 @@ export default function MainScreen() {
   const [pokeType, setpokeType] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-    const fetchPokemon = async () => {
+    const fetchPokemon = async (event) => {
+      if (event) {
+        event.preventDefault() 
+    }
       // --- Step 1: Initialization ---
     setIsLoading(true)
     setError(null)
     setfirstApiResponse(null)
+    setpokeTypeImg(null)
     setSecondApiResponse(null)
       try {
     // --- Step 2: FIRST FETCH (Get general poke data) ---
@@ -52,32 +57,58 @@ export default function MainScreen() {
     setpokeWeight(dataFromFirstApi.weight)
     setpokeType(dataFromFirstApi.types.map((x)=>x.type.name).join(' '))
     // now we can get the poke id to get more info in second fetch
-    const pokeId = dataFromFirstApi.id;
+    const pokeId = dataFromFirstApi.id
+    //here I'm getting the images for the types
+    try{
+      let typeLinkArr = []
+      let typeSprites = []
+      dataFromFirstApi.types.forEach((x)=>typeLinkArr.push(x.type.url))
+      const p1 = typeLinkArr.map(async(url)=>{
+        const response = await fetch(url)
+        if(!response.ok){
+          throw new Error(`Failed to fetch ${url}: ${response.statusText}, this is for the types`)
+        }
+        return response.json()
+      })
+      const typeImg = await Promise.all(p1)
+      typeImg.forEach((x)=>{
+        typeSprites.push(x.sprites["generation-viii"]["brilliant-diamond-and-shining-pearl"]["name_icon"])
+      })
+      setpokeTypeImg(typeSprites)
+    }catch(typeImageError){
+      console.warn("error getting type images", typeImageError)
+    }
     // --- Step 3: SECOND FETCH (get more data from a different url using the poke id) ---
     // this fetch will give us a description of the pokemon
-    const secondPokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`);
-    
-    if (!secondPokeApiResponse.ok) {
-      throw new Error(`second fetch failed: ${secondPokeApiResponse.status}`);
+    try {
+            const secondPokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeId}/`)
+            if (!secondPokeApiResponse.ok) {
+                // We log the non-critical error but DO NOT throw or set global state.
+                console.warn(`Second fetch failed, status: ${secondPokeApiResponse.status}. All good, default description will load`)
+                // Return here to skip processing the response body if the fetch failed.
+                return
+            }
+            const dataFromSecondApi = await secondPokeApiResponse.json()
+            setSecondApiResponse(dataFromSecondApi)
+            setPokeDescription(dataFromSecondApi.flavor_text_entries[0].flavor_text)
+        } catch (innerError) {
+            // Catches network errors or issues parsing the JSON for the second fetch.
+            console.warn("Non-critical error during second fetch:", innerError)
+            // Crucially, we do NOTHING with the global setError here.
+        }
+    } catch (outerError) {
+        // --- Step 4: Critical Error Handling (Only for Step 2 failure) ---
+        console.error("Critical fetching error:", outerError)
+        setError(`Data load error: ${outerError.message}`)
+    } finally {
+        // --- Step 5: Finalization ---
+        setIsLoading(false)
     }
-    const dataFromSecondApi = await secondPokeApiResponse.json();
-    setSecondApiResponse(dataFromSecondApi) // Save the result of the second fetch
-    setPokeDescription(dataFromSecondApi.flavor_text_entries[0].flavor_text)
-  } catch (err) {
-    // --- Step 4: Error Handling ---
-    console.error("Sequential fetching error:", err);
-    setError(`Data load error: ${err.message}`);
-  } finally {
-    // --- Step 5: Finalization ---
-    setIsLoading(false);
   }
-    }
   
   return (
     <>
-    <ScreenContainerData dataFromFirstApi={firstApiResponse} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
-    
-    
+    <ScreenContainerData dataFromFirstApi={firstApiResponse}  typeSprites={pokeTypeImg} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
     <SearchBar pokemonName={pokemonName} handleInputChange={handleInputChange} triggerFetch={fetchPokemon} isFetching={isLoading}/>
     </>
   )

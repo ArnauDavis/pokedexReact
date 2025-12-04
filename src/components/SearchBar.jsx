@@ -13,9 +13,10 @@ export default function SearchBar({pokemonName, handleInputChange, triggerFetch,
      
 
     <div className="mt-5 w-full max-w-md mx-auto font-mono">
-      <div
-        className="relative p-6 bg-black border-2 border-green-400 rounded-lg shadow-lg overflow-hidden"
-      >
+      <form
+                className="relative p-6 bg-black border-2 border-green-400 rounded-lg shadow-lg overflow-hidden"
+                onSubmit={triggerFetch}
+            >
         
 
         <div
@@ -63,7 +64,7 @@ export default function SearchBar({pokemonName, handleInputChange, triggerFetch,
                     <span><span className="text-red-400">Tip:</span> add -gmax</span>
                 </p>
             <button className="fetch-button bg-red-950 text-red-400 border border-red-400 shadow-[0_4px_0_0_rgba(248,113,113,1)] font-medium overflow-hidden relative px-2 py-2 rounded-md hover:brightness-150 hover:shadow-none hover:translate-y-[4px] active:opacity-75 outline-none duration-300 group"
-                onClick={triggerFetch} 
+                type="submit"
                 >{isFetching ? 'Searching...' : `Search`}
                 <span className="bg-red-400 shadow-red-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]">
                 </span>
@@ -78,7 +79,7 @@ export default function SearchBar({pokemonName, handleInputChange, triggerFetch,
         <div className="absolute bottom-0 left-12 w-px h-4 bg-green-500/50"></div>
         <div className="absolute bottom-0 left-16 w-px h-6 bg-green-500/30"></div>
         <div className="absolute bottom-0 left-20 w-px h-2 bg-green-500/70"></div>
-      </div>
+      </form>
       
     </div>
     
