@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import staticTv from "../assets/imgs/static.gif"
 import errorScreen from '../assets/imgs/error.gif'
+import Loading from '../assets/Loading'
 export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSecondApi,isLoading,error}) {
  
   const [screen, setScreen] = useState('idle')
@@ -57,6 +58,8 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
     renderResult=<img className="w-full h-full object-fill rounded-l" src={staticTv} alt="pokeScreen" />
   }else if(screen=='success'){
     renderResult=mainScreenContent
+  }else if(screen=='loading'){
+    renderResult=<Loading/>
   }else if(screen=="error")
     renderResult=<img className="w-full h-full object-fill rounded-l" src={errorScreen} alt="errorScreen" />
   return (
