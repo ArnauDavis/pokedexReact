@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-    <div className="flex justify-center py-10 px-5">
+    <div className="flex justify-center py-2 px-5">
     <PokedexFrame/>
     </div>
     </>

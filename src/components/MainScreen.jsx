@@ -1,14 +1,15 @@
 import {useState} from 'react'
-import staticTv from "../assets/imgs/static.gif"
+import HeadLights from "./HeadLights"
 import SearchBar from "./SearchBar"
 import ScreenContainerData from './ScreenContainerData'
+import NextUp from './NextUp'
 export default function MainScreen() {
 
   const [pokemonName, setPokemonName] = useState('')
   const handleInputChange = (event) => {
         setPokemonName(event.target.value.toLowerCase()); 
     }
-  const [screen, setScreen] = useState(staticTv)
+
   const [firstApiResponse, setfirstApiResponse] = useState(null)
   const [secondApiResponse, setSecondApiResponse] = useState(null)
   const [pokeTypeImg, setpokeTypeImg] = useState(null)
@@ -112,7 +113,9 @@ export default function MainScreen() {
   
   return (
     <>
+    <HeadLights/>
     <ScreenContainerData dataFromFirstApi={firstApiResponse}  typeSprites={pokeTypeImg} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
+    <NextUp/>
     <SearchBar pokemonName={pokemonName} handleInputChange={handleInputChange} triggerFetch={fetchPokemon} isFetching={isLoading}/>
     </>
   )
