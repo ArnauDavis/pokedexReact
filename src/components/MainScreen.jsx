@@ -113,7 +113,7 @@ export default function MainScreen() {
   
   return (
     <>
-    <HeadLights/>
+    <HeadLights dataFromFirstApi={firstApiResponse} isLoading={isLoading} error={error}/>
     <ScreenContainerData dataFromFirstApi={firstApiResponse}  typeSprites={pokeTypeImg} dataFromSecondApi={secondApiResponse} isLoading={isLoading} error={error}/>
     <NextUp/>
     <SearchBar pokemonName={pokemonName} handleInputChange={handleInputChange} triggerFetch={fetchPokemon} isFetching={isLoading}/>
