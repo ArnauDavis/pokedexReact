@@ -28,6 +28,10 @@ export default function MainScreen() {
       if (event) {
         event.preventDefault() 
     }
+    if(pokemonName==''){
+      setError('No input detected')
+      return
+    }
       // --- Step 1: Initialization ---
     setIsLoading(true)
     setError(null)
