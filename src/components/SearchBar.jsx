@@ -61,7 +61,7 @@ export default function SearchBar({pokemonName, handleInputChange, triggerFetch,
         <div className="mt-4 flex flex-col gap-2">
                 <p className="text-xs text-green-500 opacity-80 flex items-center gap-2">
                     <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                    <span><span className="text-red-400">Tip:</span> add -gmax</span>
+                    <span><span className="text-red-400">Tip: </span>Try adding -mega or -gmax</span>
                 </p>
             <button className="fetch-button bg-red-950 text-red-400 border border-red-400 shadow-[0_4px_0_0_rgba(248,113,113,1)] font-medium overflow-hidden relative px-2 py-2 rounded-md hover:brightness-150 hover:shadow-none hover:translate-y-[4px] active:opacity-75 outline-none duration-300 group"
                 type="submit"

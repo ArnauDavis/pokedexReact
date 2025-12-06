@@ -37,8 +37,8 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
           </div>
         </div>
         <div className='flex justify-around pb-4'>
-          <span>{dataFromFirstApi.height/10} m</span>
-          <span>{dataFromFirstApi.weight/10} lbs.</span>
+          <span>HT {dataFromFirstApi.height/10} m</span>
+          <span>WT {dataFromFirstApi.weight/10} lbs.</span>
         </div>
       {dataFromSecondApi ? (
             <div className='flex justify-around'> 
@@ -64,7 +64,7 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
     renderResult=<img className="w-full h-full object-fill rounded-l" src={errorScreen} alt="errorScreen" />
   return (
     <>
-    <div className="h-80 mt-5 flex justify-center bg-green-400 backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]">
+    <div className={`h-80 mt-5 flex justify-center ${(screen === 'idle' || screen === 'error')? 'bg-black': 'bg-green-400'} backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]`}>
       {renderResult}
       
     </div>
