@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import PokedexFrame from './components/pokedexFrame'
-import MainScreen from './components/MainScreen'
+import PokedexFrame from './components/PokedexFrame'
+
 
 import './App.css'
 
