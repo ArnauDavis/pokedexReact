@@ -19,7 +19,7 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
   }, [dataFromFirstApi,isLoading, error])
   let mainScreenContent
   dataFromFirstApi? mainScreenContent=(
-      <div className='flex flex-col space-y-1 p-2'>
+      <div className='flex flex-col space-y-1 px-2'>
         <div className='flex justify-start space-x-12'>
           <span><img className="w-40 h-40" src={dataFromFirstApi.sprites.front_default} alt="pokePic" /></span>
           <div className='flex flex-col items-start justify-center space-y-2'>
