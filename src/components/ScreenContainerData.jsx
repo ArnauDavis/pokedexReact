@@ -43,7 +43,7 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
       {dataFromSecondApi ? (
             <div className='flex justify-around'> 
               <div className='w-11/12 text-center'>
-                <span>{dataFromSecondApi.flavor_text_entries[0].flavor_text}</span>
+                <span>{dataFromSecondApi.flavor_text_entries[4].flavor_text}</span>
               </div>
             </div>
         ) : (
@@ -64,7 +64,7 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
     renderResult=<img className="w-full h-full object-fill rounded-l" src={errorScreen} alt="errorScreen" />
   return (
     <>
-    <div className={`h-80 mt-5 flex justify-center ${(screen === 'idle' || screen === 'error')? 'bg-black': 'bg-green-400'} backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]`}>
+    <div className={`h-80 mt-5 flex justify-center ${(screen === 'idle' || screen === 'error' || screen === 'loading')? 'bg-black': 'bg-green-500'} backdrop-blur-md p-1 rounded-xl shadow-lg border-4 border-black shadow-[inset_0_0_0_4px_white]`}>
       {renderResult}
       
     </div>

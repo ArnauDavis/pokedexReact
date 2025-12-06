@@ -16,6 +16,7 @@ export default function HeadLights({dataFromFirstApi,isLoading,error}){
     }, [dataFromFirstApi,isLoading, error])
 
     let simpleStyle = "p-3 border-2 border-black rounded-full"
+    let bootRing = (lights === 'idle' || lights === 'error')? "border-green-800" : "border-green-500"
     let bootLight = (lights === 'idle' || lights === 'error')? "bg-black" : "bg-blue-500"
     let idleLight = (lights === 'idle' || lights === 'error')? 'bg-red-400' : 'bg-red-800'
     let loadingLight = lights=='loading'? "bg-yellow-400" : "bg-yellow-800"
@@ -24,7 +25,7 @@ export default function HeadLights({dataFromFirstApi,isLoading,error}){
     return(
         <>
         <div className="flex justify-end items-center">
-                <span className={`p-5 border-4 border-green-300 rounded-full ${bootLight}`}></span>
+                <span className={`p-5 border-4 ${bootRing} rounded-full ${bootLight}`}></span>
                 <div className="flex ml-2 space-x-2">
                     <span className={`${simpleStyle} ${idleLight}`}></span>
                     <span className={`${simpleStyle} ${loadingLight}`}></span>
