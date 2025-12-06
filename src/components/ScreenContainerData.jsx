@@ -43,7 +43,7 @@ export default function ScreenContainer({dataFromFirstApi,typeSprites,dataFromSe
       {dataFromSecondApi ? (
             <div className='flex justify-around'> 
               <div className='w-11/12 text-center'>
-                <span>{dataFromSecondApi.flavor_text_entries[4].flavor_text}</span>
+                <span>{dataFromSecondApi.flavor_text_entries[1].flavor_text}</span>
               </div>
             </div>
         ) : (

@@ -17,7 +17,7 @@ export default function HeadLights({dataFromFirstApi,isLoading,error}){
 
     let simpleStyle = "p-3 border-2 border-black rounded-full"
     let bootRing = (lights === 'idle' || lights === 'error')? "border-green-800" : "border-green-500"
-    let bootLight = (lights === 'idle' || lights === 'error')? "bg-black" : "bg-blue-500"
+    let bootLight = (lights === 'idle' || lights === 'error')? "bg-blue-800" : "bg-blue-500"
     let idleLight = (lights === 'idle' || lights === 'error')? 'bg-red-400' : 'bg-red-800'
     let loadingLight = lights=='loading'? "bg-yellow-400" : "bg-yellow-800"
     let resultLight = lights=='success'? "bg-green-400" : "bg-green-800"

@@ -1,16 +1,26 @@
-# React + Vite
+# A pokédex
+This is a pokédex that makes api calls to the pokeapi! Leveraging react, users get instantaneous feedback and interactivity with this useful app. This an upgrade to my previous pokédex that can be found here https://abpokedex.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Link to project:** 
 
-Currently, two official plugins are available:
+<div style="height: 200px; overflow: hidden;">
+    <img src="" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="pokédex-gif"/>
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## How It's Made:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Tech used:** React, Tailwind
 
-## Expanding the ESLint configuration
+React hooks make giving users a seemless and responsive experience so much easier, in particular with this project, useState and useEffect were particularly useful. I understand why actors like using props when performing because even here props were extremely useful for a great performance. In my previous pokédex, I was limited with how I could effectively give users feedback with their interactions. A major upgrade here is the use of useState for things like a loading state, a state for successful or failed api calls, and a state for data recieved from api calls. I also used components and passed data between them as props to prevent having one giant js file holding all functionality. 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+So a walk through of the user experience and what is happening behind the scenes. On page load there are 2 components that render in an idle state, the headlights and the main pokédex screen. Thanks to useEffect, on page load, they both have a state called lights and screen respectively that is set to idle. In this idle state, the lights are styled to appear as if they are off, and the screen is just static. The useEffect dependency array for both includes a response from an api call, a loading state, and an error state, meaning if any of these change their state, the useEffect function will be triggered and the states of the lights and screen will be updated, but more on that in a little bit. Users have an especially cool styled search form to put in a pokémon name, a couple of things can happen from here, for example, if the name is spelled incorrectly, it is a name that does not exist, or it is blank, the fetch function that is triggered on submit will return an error that will set the lights and screen state to error, this makes the lights to their error styling and the screen will display an error for users to see. If the pokémon name is valid and the api gives a response, the states are set to a successful state which will have the lights styled to reflect the success, and the screen will display the pokemon and all the relevant information. While users are waiting for a response, the state is set to loading, in this loading state the lights are styled to show it is loading, the screen has a loading component render indicating the loading status, and the search button in the input field even switches from search to searching..., these are things I just could not do with vanilla js. 
+
+Once users have a pokemon loaded, the names of the previous or next pokemon that lead or follow the current pokémon in the pokédex will appear above the previous or next button, if it is the first pokémon or last pokémon, no name will appear on the previous or next button depending on the circumstance. If a button with a name above it is clicked, it will trigger a fetch for that pokémon. If there is no name, there is a disable feature on the button to prevent any errors. Admittedly this was an interesting feat to accomplish, this is because the search feature is inside of a form which sends a function, and the previous or next button send a string. To accommodate these differences, I had to update my fetch logic to check for the type of the incoming request, if it was a function from the form, I could catch it and prevent the default page reload that form submissions trigger, and if it was just a string, I did not need to worry about any events happening and could just use it in my fetch url. I of course was still able to catch empty inputs too, just in case.
+
+The best part about all of this, is the page never has to reload during any of these transitions, react just reacts to any changes and only refreshes the necessary components to reflect any changes. 
+
+
+## Lessons Learned
+
+

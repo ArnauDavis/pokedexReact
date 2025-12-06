@@ -18,7 +18,7 @@ export default function MainScreen() {
   const [prevPoke, setPrevPoke] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const MAX_POKEMON_ID = 1025
+  const maxId = 1025
     const fetchPokemon = async (param) => {
       let identifier = ''
     if (param && typeof param.preventDefault === 'function'){
@@ -40,8 +40,8 @@ export default function MainScreen() {
     setpokeTypeImg(null)
     setSecondApiResponse(null)
       try {
-    // --- getting general data
-    //from this fetch we will get cries, height, id, name, pictures, type, and weight
+    // getting general data
+    // from this fetch we will get cries, height, id, name, pictures, type, and weight
     const pokeApiResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${identifier}`)
     
     if (!pokeApiResponse.ok) {
@@ -75,7 +75,7 @@ export default function MainScreen() {
       console.warn("error getting type images", typeImageError)
     }
    // Fetch and set the NEXT Pokémon
-    if (pokeId < 1025) {
+    if (pokeId < maxId) {
         try {
             const nextPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokeId + 1}/`)
             if (nextPokemon.ok) {
