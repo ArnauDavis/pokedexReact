@@ -4,7 +4,7 @@ This is a pokédex that makes api calls to the pokeapi! Leveraging react, users 
 **Link to project:** https://abreactpokedex.netlify.app/
 
 <div style="height: 200px; overflow: hidden;">
-    <img src="" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="pokédex-gif"/>
+    <img src="/src/assets/imgs/pokedex.gif" style="height: auto; width: 100%; object-fit: cover; transform: translateY(-30px);" alt="pokédex-gif"/>
 </div>
 
 
