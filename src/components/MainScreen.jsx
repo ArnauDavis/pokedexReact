@@ -5,7 +5,7 @@ import ScreenContainerData from './ScreenContainerData'
 import NextUp from './NextUp'
 export default function MainScreen() {
 
-  const [pokemonName, setPokemonName] = useState('')
+  const [pokemonName, setPokemonName] = useState('charizard')
   const handleInputChange = (param) => {
         setPokemonName(param.target.value.toLowerCase()); 
     }
